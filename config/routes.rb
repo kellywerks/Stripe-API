@@ -1,5 +1,5 @@
 Donations::Application.routes.draw do
-  root to: 'organization#index'
+  root to: 'organizations#index'
   resources :organizations
   resources :charges
 end
