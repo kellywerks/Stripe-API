@@ -3,7 +3,7 @@
 =Objective: Make a website where users can choose non-profits to donate to.
 Uses:  Ruby, Rails, Stripe
 
-* To start off with, create CRUD/L functionality for non-profits
+* [DONE] To start off with, create create/new/show functionality for non-profits
 
 * Let users choose a non-profit to donate to. To do this, use the Stripe API.
 

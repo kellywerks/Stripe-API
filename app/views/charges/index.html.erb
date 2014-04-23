@@ -1,0 +1,9 @@
+<h2>Charges</h2>
+
+<ul>
+  <%= @charges.each do |charge| %>
+
+    <li><%= charge.organization.name %>...<%= link_to charge.amount, charge_path(charge) %></li>
+
+  <% end %>
+</ul>
