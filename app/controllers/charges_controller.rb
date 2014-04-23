@@ -11,11 +11,12 @@ class ChargesController < ApplicationController
     # Amount in cents
     begin
       @amount = params[:amount]
-      binding.pry
+
       customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
         :card  => params[:stripeToken]
       )
+      binding.pry
 
       charge = Stripe::Charge.create(
         :customer    => customer.id,
@@ -23,6 +24,8 @@ class ChargesController < ApplicationController
         :description => 'Rails Stripe customer',
         :currency    => 'usd'
       )
+      flash[:notice] = "success"
+      redirect_to root_path
 
     rescue Stripe::CardError => e
       flash[:error] = e.message

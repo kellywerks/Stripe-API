@@ -1,6 +1,7 @@
 <%= form_tag charges_path do %>
   <%= label_tag :amount %>
   <%= text_field_tag :amount %>
+  <%= collection_select :charge, :organization_id, Organization.all.order(:name), :id, :name %>
 
   <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
