@@ -5,31 +5,36 @@ class ChargesController < ApplicationController
   end
 
   def new
+    @charge = Charge.new
   end
 
   def create
-    # Amount in cents
     begin
-      @amount = params[:amount]
-
-      customer = Stripe::Customer.create(
-        :email => params[:stripeEmail],
-        :card  => params[:stripeToken]
-      )
-      binding.pry
-
-      charge = Stripe::Charge.create(
-        :customer    => customer.id,
-        :amount      => @amount,
-        :description => 'Rails Stripe customer',
-        :currency    => 'usd'
-      )
+      if Charge.stripe_process_charge(params)
+        customer = Customer.save_customer(cust_params)
+        charge = Charge.save_charge(customer.id,charge_params)
+      end
       flash[:notice] = "success"
       redirect_to root_path
-
     rescue Stripe::CardError => e
-      flash[:error] = e.message
-      redirect_to charges_path
+      flash[:notice] = e.message
+      redirect_to root_path
     end
+  end
+
+private
+  def cust_params
+    params.permit(:stripeBillingName,
+                  :stripeEmail,
+                  :stripeBillingAddressLine1,
+                  :stripeBillingAddressZip,
+                  :stripeBillingAddressCity,
+                  :stripeBillingAddressState,
+                  :stripeBillingAddressCountry,
+                  :stripeBillingAddressCountryCode )
+  end
+
+  def charge_params
+    params.require(:charge).permit(:amount, :organization_id)
   end
 end
