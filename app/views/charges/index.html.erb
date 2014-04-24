@@ -1,9 +1,9 @@
 <h2>Charges</h2>
 
 <ul>
-  <%= @charges.each do |charge| %>
+  <% @charges.each do |charge| %>
 
-    <li><%= charge.organization.name %>...<%= link_to charge.amount, charge_path(charge) %></li>
+    <li><%= charge.customer.name %> made a donation of <%= number_to_currency("#{(charge.amount)/100}") %> to <%= charge.organization.name %> </li>
 
   <% end %>
 </ul>

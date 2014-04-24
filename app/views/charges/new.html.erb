@@ -1,12 +1,15 @@
-<%= form_tag charges_path do %>
-  <%= label_tag :amount %>
-  <%= text_field_tag :amount %>
-  <%= collection_select :charge, :organization_id, Organization.all.order(:name), :id, :name %>
+<%= form_for @charge do |form| %>
+
+  <%= form.label :amount %>
+  <%= form.text_field :amount %>
+  <%= form.collection_select :organization_id, Organization.all.order(:name), :id, :name %>
 
   <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-    data-name="Donations" >
+    data-name="Donations"
+    data-address=""
+    data-amount="">
   </script>
 
 <% end %>
