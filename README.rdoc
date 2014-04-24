@@ -1,6 +1,6 @@
-==Non-profit donations
-=Authors:  Maureen Dugan and Kelly Becker
-=Objective: Make a website where users can choose non-profits to donate to.
+=Non-profit donations app
+==Authors:  Maureen Dugan and Kelly Becker
+==Objective: Make a website where users can choose non-profits to donate to.
 Uses:  Ruby, Rails, Stripe
 
 * [DONE] To start off with, create create/new/show functionality for non-profits
